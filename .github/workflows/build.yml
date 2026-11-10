@@ -12,9 +12,9 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Build standalone executable
-        run: dotnet publish WindowsPersonalize/WindowsPersonalize.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
+        run: dotnet publish WindowsPersonalize.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
       - uses: actions/upload-artifact@v4
         with:
-          name: WindowsPersonalize-NEXUS-x64
+          name: WindowsPersonalize-x64
           path: publish/WindowsPersonalize.exe
           if-no-files-found: error
