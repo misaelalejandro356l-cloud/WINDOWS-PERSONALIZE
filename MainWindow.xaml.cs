@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Runtime.InteropServices;
-using System.Management;
+
 namespace WindowsPersonalize;
 public partial class MainWindow : Window
 {
@@ -22,7 +22,7 @@ public partial class MainWindow : Window
  private string? Ask(string prompt,string initial){var w=new Window{Title="Personalizar",Width=360,Height=150,WindowStartupLocation=WindowStartupLocation.CenterOwner,Owner=this,Background=new SolidColorBrush(Color.FromRgb(12,12,32)),Foreground=Brushes.White};var p=new StackPanel{Margin=new Thickness(14)};p.Children.Add(new TextBlock{Text=prompt,Margin=new Thickness(0,0,0,8)});var t=new TextBox{Text=initial,Padding=new Thickness(6)};p.Children.Add(t);var ok=new Button{Content="Aceptar",Margin=new Thickness(0,8,0,0),Padding=new Thickness(8)};ok.Click+=(_,_)=>w.DialogResult=true;p.Children.Add(ok);w.Content=p;return w.ShowDialog()==true?t.Text:null;}
  private void Launch(string path){try{if(path.StartsWith("http"))Process.Start(new ProcessStartInfo(path){UseShellExecute=true});else Process.Start(new ProcessStartInfo(path){UseShellExecute=true});}catch(Exception ex){MessageBox.Show("No se pudo abrir: "+ex.Message,"NEXUS");}}
  private void AddApp(object s,RoutedEventArgs e){var d=new OpenFileDialog{Title="Selecciona una aplicación o acceso directo",Filter="Aplicaciones y accesos directos|*.exe;*.lnk;*.url|Todos los archivos|*.*"};if(d.ShowDialog()==true){apps.Add((Path.GetFileNameWithoutExtension(d.FileName),d.FileName,"✦"));RenderApps();}}
- private void SearchFocus(object s,System.Windows.Input.KeyboardFocusChangedEventArgs e){if(SearchBox.Text=="Buscar aplicaciones o ajustes...")SearchBox.Clear();}
+ private void SearchFocus(object s,RoutedEventArgs e){if(SearchBox.Text=="Buscar aplicaciones o ajustes...")SearchBox.Clear();}
  private void SearchChanged(object s,TextChangedEventArgs e){if(AppGrid!=null)RenderApps(SearchBox.Text=="Buscar aplicaciones o ajustes..."?"":SearchBox.Text);}
  private void ChooseWallpaper(object s,RoutedEventArgs e){var d=new OpenFileDialog{Filter="Imágenes|*.png;*.jpg;*.jpeg;*.bmp"};if(d.ShowDialog()==true){try{var uri=new Uri(d.FileName);Background=new ImageBrush(new BitmapImage(uri)){Stretch=Stretch.UniformToFill,Opacity=.30};StatusText.Text="Fondo aplicado a NEXUS";}catch(Exception ex){MessageBox.Show(ex.Message);}}}
  private void ToggleTheme(object s,RoutedEventArgs e){light=!light;Background=new SolidColorBrush(light?Color.FromRgb(23,26,48):Color.FromRgb(5,7,19));StatusText.Text=light?"Tema alternativo":"Tema NEXUS Dark";}
