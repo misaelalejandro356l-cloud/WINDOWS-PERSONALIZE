@@ -1,7 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType><TargetFramework>net8.0-windows</TargetFramework><UseWPF>true</UseWPF>
-    <Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings><AssemblyName>WindowsPersonalize</AssemblyName>
-    <Version>1.4.0</Version><ApplicationIcon></ApplicationIcon>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>WindowsPersonalize</AssemblyName>
+    <Version>1.4.0</Version>
+    <EnableDefaultApplicationDefinition>true</EnableDefaultApplicationDefinition>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="WindowsPersonalize/**/*.cs" />
+    <Page Remove="WindowsPersonalize/**/*.xaml" />
+    <ApplicationDefinition Remove="WindowsPersonalize/**/*.xaml" />
+    <None Remove="WindowsPersonalize/**" />
+  </ItemGroup>
 </Project>
